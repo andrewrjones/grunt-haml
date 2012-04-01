@@ -1,0 +1,41 @@
+{
+  "name": "grunt-haml",
+  "description": "Grunt plugin for compiling haml files",
+  "version": "0.1.0",
+  "homepage": "https://github.com/andrewrjones/grunt-haml",
+  "author": {
+    "name": "Andrew Jones",
+    "email": "andrewjones86@googlemail.com",
+    "url": "http://andrew-jones.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrewrjones/grunt-haml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrewrjones/grunt-haml/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/andrewrjones/grunt-haml/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "bin": "bin/grunt-haml",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt": "~0.3.6",
+    "haml": "~0.2.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.6",
+    "shelljs": "*"
+  },
+  "keywords": []
+}
