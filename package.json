@@ -1,7 +1,7 @@
 {
   "name": "grunt-haml",
   "description": "Grunt task for compiling haml files",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/andrewrjones/grunt-haml",
   "author": {
     "name": "Andrew Jones",
@@ -34,8 +34,7 @@
     "haml": "git://github.com/creationix/haml-js.git"
   },
   "devDependencies": {
-    "grunt": "~0.3.7",
-    "shelljs": "*"
+    "grunt": "~0.3.7"
   },
   "keywords": ["haml", "grunt", "gruntplugin"]
 }
