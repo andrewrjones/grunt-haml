@@ -17,37 +17,72 @@ module.exports = function(grunt) {
   var option = grunt.option;
   var config = grunt.config;
   var template = grunt.template;
+  
+  // external dependencies
+  var fs = require('fs');
+  var haml = require('haml');
 
   // ==========================================================================
   // TASKS
   // ==========================================================================
 
-  grunt.registerMultiTask('haml', 'Your task description goes here.', function() {
-    grunt.helper('haml', this.file.src, this.file.dest);
+  grunt.registerMultiTask('haml', 'Compile HAML files.', function() {
+    var src     = this.file.src;
+    var dest    = this.file.dest;
+    var options = this.data.options || {};
     
-    // Fail task if errors were logged.
-    if (this.errorCount) { return false; }
+    if (!src) {
+      grunt.warn('Missing src property.');
+      return false;
+    }
+
+    if (!dest) {
+      grunt.warn('Missing dest property');
+      return false;
+    }
     
-    // Otherwise, print a success message....
-    log.writeln('File "' + this.file.dest + '" written as HTML.');
+    var srcFiles = file.expandFiles(src);
+    
+    var done = this.async();
+    
+    grunt.helper('haml', srcFiles, options, function(err, html) {
+      if (err) {
+        grunt.warn(err);
+        done(false);
+        
+        return;
+      }
+
+      file.write(dest, html);
+      done();
+    });
   });
 
   // ==========================================================================
   // HELPERS
   // ==========================================================================
 
-  grunt.registerHelper('haml', function(src, dest) {
-    var haml = require('haml');
+  grunt.registerHelper('haml', function(srcFiles, options, callback) {
+    var compileHAMLFile = function(src, callback){
+      fs.readFile(src, 'utf8', function(err, data) {
+        if (err) {
+          callback(err);
+        }
+      
+        verbose.writeln('Parsing ' + src);
+        var html = haml.render(data);
+        
+        callback(null, html);
+      });
+    };
     
-    // read in source
-    var raw = file.read(src);
-    
-    // render haml
-    // TODO: pass a context if specified in config
-    var html = haml.render(raw);
-    
-    // write the rendered haml
-    file.write(dest, html);
+    utils.async.map(srcFiles, compileHAMLFile, function(err, results) {
+      if (err) {
+        callback(err);
+        return;
+      }
+     
+      callback(null, results.join(utils.linefeed));
+    });
   });
-
 };
