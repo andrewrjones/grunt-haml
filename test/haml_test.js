@@ -10,7 +10,6 @@ exports['haml'] = {
     var expected = '<div id="home"><ul class="menu"><li>Go Home</li><li>Go Back</li></ul></div>';
     
     grunt.helper('haml', [src], {}, function(err, got) {
-      console.log(got);
       test.equal(got, expected, 'should return the correct value.');
       test.done();
     });
