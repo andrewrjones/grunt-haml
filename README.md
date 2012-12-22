@@ -1,3 +1,7 @@
+**NOTE** This has now been superseded by https://github.com/concordusapps/grunt-haml. Please use that instead. 
+
+---
+
 # grunt-haml
 
 Grunt plugin for compiling haml files
